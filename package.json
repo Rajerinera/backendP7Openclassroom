@@ -1,0 +1,18 @@
+{
+  "name": "backendgroupomania",
+  "version": "1.0.0",
+  "description": "\"Openclassroom Project\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rajerinera Adrien",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1"
+  }
+}
