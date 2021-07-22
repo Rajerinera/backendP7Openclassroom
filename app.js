@@ -1,6 +1,8 @@
 const express = require("express"); //application qui permet le routing de notre backend
 require('dotenv').config(); //afin de sécuriser les données sur notre éditeur de code
 const loginRoutes = require ("./routes/login") //récuperer le path de login
+const userRoutes = require("./routes/user") //récuperer le path de user
+
 
 const app = express();
 console.log("connecté à node js");
@@ -21,6 +23,7 @@ app.use((req, res, next) => {
  app.use(express.json()); //faire apparaitre les données en json sur le localhost ou postman
 
  app.use(loginRoutes);
+ app.use(userRoutes);
 
 //test
 //const db = require("./connectiondb/db")

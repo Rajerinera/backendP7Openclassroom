@@ -1,6 +1,6 @@
 const { create, loginEmail } = require("../service/login");
 const {genSaltSync, hashSync, compareSync} = require('bcrypt');
-const { sign } = require("jsonwebtoken");
+const  jwt = require("jsonwebtoken");
 const { createPool } = require("mysql");
 
 module.exports = {
@@ -36,17 +36,18 @@ module.exports = {
             }
             const result = compareSync(body.password, results.password);
             if(result){
-                results.password = undefined;
-                const jsontoken = sign({result: results}, "TOKEN",{
+                const token = jwt.sign({result: results}, process.env.TOKEN,{
                  expiresIn:  "24h"
                 });
-                return res.json({
-                    success: 1,
+                return res.status(200).json({
+                    result: results,
                     message: "login succes",
-                    token: jsontoken
-                })
+                    token: token,
+                });
+                
+            }else{
+                res.status(400).json("User not found")
             }
-            console.log(result)
         });
-    }
-} 
+    } 
+}  
