@@ -1,8 +1,9 @@
 const pool = require("../connectiondb/db");
+const mysql = require("mysql");
 module.exports = {
     getUsers: callback => {
         pool.query(
-            'SELECT id, name, email, FROM user',
+            'SELECT * FROM user',
             [],
             (error, results, fields) => {
                 if (error) {
@@ -13,21 +14,29 @@ module.exports = {
         );
 
     },
-    getUsersById: (id, callBack) => {
-        pool.query(
-            'SELECT id, name, email FROM user WHERE id = ?', [id],
-            (error, results, fields) => {
+    getUsersById: (iduser, result) => {
+       pool.query("SELECT iduser, name, email FROM user WHERE iduser = ?", [iduser],
+            (error, res,) => {
                 if (error) {
-                    callBack(error);
+                    console.log("error", error)
+                    result(error, null);
+                    return;
+                    
+                } 
+                if(res.length){
+                    console.log("found user", res);
+                    result(null, res);
+                    return;
                 }
-                return callBack(null, results[0]);
+                result(res[0], null);
             }
-        );
-
+           
+        ); 
+        console.log(iduser)
     },
     updateUser: (data, callBack) =>{
         pool.query(
-            'UPDATE user SET name = ?, email = ?, password = ? where id = ?'
+            'UPDATE user SET name = ?, email = ?, password = ? where iduser = ?'
             [
                 data.name,
                 data.email,
@@ -44,7 +53,7 @@ module.exports = {
     },
     deleteUser: (data, callBack) =>{
         pool.query(
-            'DELETE from user WHERE id = ?', [data.id],
+            'DELETE FROM user WHERE iduser = ?', [data.id],
             (error, results, fields) =>{
                 if(error){
                    return callBack(error);

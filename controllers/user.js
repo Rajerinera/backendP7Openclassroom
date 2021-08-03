@@ -3,23 +3,16 @@ const { getUsers, getUsersById, updateUser, deleteUser } = require("../service/u
 
 module.exports = {
     getUsersById: (req, res) => {
-        const id = params.id;
-        getUsersById(id, (err, results) => {
+        getUsersById(req.params.id, (err, rows) => {
             if (err) {
-                console.log(err);
-                return;
+                console.log(err)
+                return
             }
-            if (!results) {
-                return res.json({
-                    success: 0,
-                    message: 'Not found'
-                });
-            }
-            return res.json({
-                success: 1,
-                data: results
-            });
-        });
+
+            console.log("connected?" + rows)
+            res.json(rows);
+        })
+
     },
     getUsers: (req, res) => {
         getUsers((err, results) => {
@@ -57,7 +50,7 @@ module.exports = {
     },
     deleteUser: (req, res) => {
         const data = req.body;
-        deleteUser(data,(err, results) =>{
+        deleteUser(data, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
@@ -74,5 +67,5 @@ module.exports = {
             });
         })
     }
-       
+
 };

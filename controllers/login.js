@@ -1,7 +1,7 @@
 const { create, loginEmail } = require("../service/login");
 const {genSaltSync, hashSync, compareSync} = require('bcrypt');
 const  jwt = require("jsonwebtoken");
-const { createPool } = require("mysql");
+
 
 module.exports = {
     signup:(req, res) =>{
@@ -10,7 +10,7 @@ module.exports = {
         body.password = hashSync(body.password, salt);
         create(body, (err, results)=>{
             if(err){
-                console.log(err);
+                console.log(err); 
                 return res.status(500).json({
                     success: 0,
                     message:'database error'
@@ -44,7 +44,7 @@ module.exports = {
                     message: "login succes",
                     token: token,
                 });
-                
+               
             }else{
                 res.status(400).json("User not found")
             }
