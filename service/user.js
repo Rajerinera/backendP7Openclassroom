@@ -15,7 +15,7 @@ module.exports = {
 
     },
     getUsersById: (iduser, result) => {
-       pool.query("SELECT iduser, name, email FROM user WHERE iduser = ?", [iduser],
+       pool.query("SELECT * FROM user WHERE iduser = ?", [iduser],
             (error, res,) => {
                 if (error) {
                     console.log("error", error)
@@ -34,26 +34,27 @@ module.exports = {
         ); 
         console.log(iduser)
     },
-    updateUser: (data, callBack) =>{
+    updateUser: ( data, callBack) =>{
         pool.query(
-            'UPDATE user SET name = ?, email = ?, password = ? where iduser = ?'
-            [
+            'UPDATE user SET name = ?, email = ?, WHERE iduser = ?'[
                 data.name,
-                data.email,
-                data.password,
-                data.id
-            ],
+                data.email ,
+                data],
             (error, results, fields) => {
                 if(error){
-                    callBack(error);
+                    console.log(data.name)
+                    console.log(data.email)
+                    callBack(null, error);
+                    return;
                 }
-                return callBack(null, results[0]);
+                    callBack(null, results); 
+
             }
         );
     },
     deleteUser: (data, callBack) =>{
         pool.query(
-            'DELETE FROM user WHERE iduser = ?', [data.id],
+            'DELETE FROM user WHERE iduser = ?', [data],
             (error, results, fields) =>{
                 if(error){
                    return callBack(error);

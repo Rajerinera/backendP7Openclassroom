@@ -27,10 +27,13 @@ module.exports = {
         });
     },
     updateUser: (req, res) => {
-        const body = req.body;
-        const salt = genSaltSync(10);
-        body.password = hashSync(body.password, salt);
-        updateUser(body, (err, results) => {
+        if(!req.body){
+            res.status(400).send({
+                message : "probleme"
+            });
+        }
+        const id = req.params.id;
+        updateUser(id, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
@@ -38,15 +41,14 @@ module.exports = {
             if (!results) {
                 return res.json({
                     sucess: 0,
-                    message: "update failed"
+                    message: "update failed" 
                 })
             }
             return res.json({
                 sucess: 1,
-                message: "updated sucess"
+                message: "updated sucess",
             })
         })
-
     },
     deleteUser: (req, res) => {
         const data = req.body;
