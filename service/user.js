@@ -1,5 +1,7 @@
 const pool = require("../connectiondb/db");
 const mysql = require("mysql");
+
+
 module.exports = {
     getUsers: callback => {
         pool.query(
@@ -11,7 +13,7 @@ module.exports = {
                 }
                 return callback(null, results);
             }
-        );
+        ); 
 
     },
     getUsersById: (iduser, result) => {
@@ -34,20 +36,19 @@ module.exports = {
         ); 
         console.log(iduser)
     },
-    updateUser: ( data, callBack) =>{
+    updateUser: ( data, callBack) =>{  
         pool.query(
-            'UPDATE user SET name = ?, email = ?, WHERE iduser = ?'[
-                data.name,
-                data.email ,
-                data],
-            (error, results, fields) => {
+        `UPDATE user SET name = ?, email = ? WHERE iduser = ?`,[data.name,data.email,data.id],
+            (error, results, fields) => { 
                 if(error){
-                    console.log(data.name)
+                    console.log(error)
+                    callBack(error); ;   
+                }  
+                    console.log(data.name) 
                     console.log(data.email)
-                    callBack(null, error);
-                    return;
-                }
-                    callBack(null, results); 
+                    console.log(data.id)
+                    console.log(results) 
+                    return callBack(null, results[0]); 
 
             }
         );
@@ -60,7 +61,7 @@ module.exports = {
                    return callBack(error);
                 }
                 return callBack(null, results[0]);
-            }
+            } 
         );
     },
 }

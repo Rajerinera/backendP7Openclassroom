@@ -32,21 +32,14 @@ module.exports = {
                 message : "probleme"
             });
         }
-        const id = req.params.id;
-        updateUser(id, (err, results) => {
+        updateUser(req.body, (err, results) => {  
             if (err) {
-                console.log(err);
+                console.log(err); 
                 return;
-            }
-            if (!results) {
-                return res.json({
-                    sucess: 0,
-                    message: "update failed" 
-                })
             }
             return res.json({
                 sucess: 1,
-                message: "updated sucess",
+                message: "updated sucess", 
             })
         })
     },
