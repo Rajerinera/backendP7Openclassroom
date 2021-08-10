@@ -3,12 +3,13 @@ const pool = require('../connectiondb/db');
 module.exports = {
     createComment:(newComment, result) => {
         pool.query(
-            "INSERT into `comment`(`title`, `content`) VALUES(?,?)",[
+            "INSERT into `comment`(`title`, `content`, `idtestuser`) VALUES(?,?,?)",[
                 newComment.title,
-                newComment.content
+                newComment.content,
+                newComment.idtestuser
             ],
             (error, results, fields) => {
-                if(error){
+                if(error){ 
                     result(error);
                 }
                 return result(null, results)
