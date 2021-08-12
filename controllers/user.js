@@ -9,7 +9,6 @@ module.exports = {
                 return
             }
 
-            console.log("connected?" + rows)
             res.json(rows);
         })
 

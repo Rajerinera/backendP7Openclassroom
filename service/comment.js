@@ -18,7 +18,7 @@ module.exports = {
         );
     },
 
-    getComment: callBack => {
+    AllComment: callBack => {
         pool.query(
             'SELECT * FROM comment',
             [],
@@ -26,8 +26,9 @@ module.exports = {
                 if (error) {
                     return callBack(error);
                 }
-                return callBack(null, results)
+                callBack(null, results)
             }
+           
         );
     },
 
@@ -36,7 +37,7 @@ module.exports = {
             (error, res,) => {
                 if (error) {
                     console.log("error", error);
-                    result(error, null);
+                    result(null, error);
                     return;
                 }
                 if (res.lenght) {

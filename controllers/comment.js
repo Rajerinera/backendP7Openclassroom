@@ -1,4 +1,4 @@
-const { createComment, getAllComment, getCommentById, updateComment, deleteComment } = require("../service/comment");
+const { createComment, AllComment, getCommentById, updateComment, deleteComment } = require("../service/comment");
 const { deleteUser } = require("../service/user");
 
 module.exports = {
@@ -23,16 +23,14 @@ module.exports = {
             })
         })
     },
-    getComment: (req, res) => {
-        t.getComment((err, results) => {
+
+    AllComment: (req, res) => {
+        AllComment((err, results) => {
             if (err) {
                 console.log(err);
                 return;
             }
-            return res.json({
-                success: 1,
-                data: results,
-            });
+            res.send(results);
         });
     },
     getCommentById: (req, res) => {

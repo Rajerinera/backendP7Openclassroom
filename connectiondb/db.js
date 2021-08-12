@@ -6,7 +6,7 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.SQLdb,
-  connectionLimit: 10
+  connectionLimit: 50
 });
 
 //Verifier que l'on est bien connecté à la base de données
