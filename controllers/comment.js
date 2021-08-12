@@ -1,19 +1,19 @@
-const {createComment, getAllComment, getCommentById, updateComment, deleteComment} = require("../service/comment");
+const { createComment, getAllComment, getCommentById, updateComment, deleteComment } = require("../service/comment");
 const { deleteUser } = require("../service/user");
 
 module.exports = {
     createComment: (req, res) => {
-        if(!req.body){
+        if (!req.body) {
             res.status(400).send({
                 message: "need content"
             })
         }
-        createComment(req.body, (err, results) =>{
-            if(err){
+        createComment(req.body, (err, results) => {
+            if (err) {
                 console.log(err);
                 return res.status(500).json({
                     sucess: 0,
-                    message:'error'
+                    message: 'error'
                 });
             }
             return res.status(200).json({
@@ -23,36 +23,36 @@ module.exports = {
             })
         })
     },
-    getAllComment:(req, res) =>{
-        getAllComment((err, results) =>{
-            if(err){
+    getComment: (req, res) => {
+        t.getComment((err, results) => {
+            if (err) {
                 console.log(err);
                 return;
             }
             return res.json({
-                sucess: 1,
-                data: results
-            })
+                success: 1,
+                data: results,
+            });
         });
     },
     getCommentById: (req, res) => {
-        getCommentById(req.params.getCommentById, (err, rows) => {
-            if(err){
+        getCommentById(req.params.id, (err, rows) => {
+            if (err) {
                 console.log(err)
                 return
             }
-            console.log("connect" + rows)
-            res.json(rows);
+            console.log("connect réussi ??" + rows)
+            res.send(rows);
         })
     },
-    updateComment:(req, res)=>{
-        if(!req.body){
+    updateComment: (req, res) => {
+        if (!req.body) {
             res.status(400).send({
-                messaage : "problème comment"
+                messaage: "problème comment"
             });
         }
-        updateComment(req.body, (err, results) =>{
-            if(err){
+        updateComment(req.body, (err, results) => {
+            if (err) {
                 console.log(err);
                 return;
             }
@@ -63,20 +63,20 @@ module.exports = {
         })
     },
 
-    deleteComment:(req, res) => {
-        deleteUser(req.body, (err, results)=>{
-            if(err){
+    deleteComment: (req, res) => {
+        deleteUser(req.body, (err, results) => {
+            if (err) {
                 console.log(err);
                 return;
             }
-            if(!results){
+            if (!results) {
                 return res.json({
                     sucess: 0,
                     message: 'delete failed',
                 });
             }
             return res.json({
-                sucess: 1, 
+                sucess: 1,
                 message: 'comment delete'
             })
         });

@@ -1,15 +1,16 @@
 const pool = require('../connectiondb/db');
+const mysql = require("mysql");
 
 module.exports = {
-    createComment:(newComment, result) => {
+    createComment: (newComment, result) => {
         pool.query(
-            "INSERT into `comment`(`title`, `content`, `idtestuser`) VALUES(?,?,?)",[
-                newComment.title,
-                newComment.content,
-                newComment.idtestuser
-            ],
+            "INSERT into `comment`(`title`, `content`, `idcom`) VALUES(?,?,?)", [
+            newComment.title,
+            newComment.content,
+            newComment.idcom
+        ],
             (error, results, fields) => {
-                if(error){ 
+                if (error) {
                     result(error);
                 }
                 return result(null, results)
@@ -17,64 +18,64 @@ module.exports = {
         );
     },
 
-    getAllComment: result =>{
+    getComment: callBack => {
         pool.query(
-            "SELECT * FROM comment",
+            'SELECT * FROM comment',
             [],
             (error, results, fields) => {
-                if(error){
-                    return result(error)
+                if (error) {
+                    return callBack(error);
                 }
-                return result(null, results)
+                return callBack(null, results)
             }
-        )
+        );
     },
 
-    getCommentById: (id, result) => {
-        "SELECT * FROM comment WHERE idcomment = ?",[
-            id
-        ],
-        (error, results) => {
-            if(error){
-                console.log(error, "error");
-                result(error, null);
-                return
-            }
-            if(results.lenght){
-                console.log("found user", results);
-                result(null, results);
-                return
-            }
-            result(results[0], null);
+    getCommentById: (idcom, result) => {
+        pool.query("SELECT * FROM comment WHERE idcom = ?", [idcom],
+            (error, res,) => {
+                if (error) {
+                    console.log("error", error);
+                    result(error, null);
+                    return;
+                }
+                if (res.lenght) {
+                    console.log("found comment", res);
+                    result(null, res);
+                    return;
+                }
+                result(res, null);
 
-        }
+            }
+        );
+        console.log(idcom)
     },
-    updateComment: ( comment, callBack) =>{  
+    updateComment: (comment, callBack) => {
         pool.query(
-        `UPDATE user SET title = ?, content = ? WHERE idcomment = ?`,[comment.title,comment.email,comment.id],
-            (error, results, fields) => { 
-                if(error){
+            `UPDATE user SET title = ?, content = ? WHERE idcomment = ?`, [comment.title, comment.email, comment.id],
+            (error, results, fields) => {
+                if (error) {
                     console.log(error)
-                    callBack(error); ;   
-                }  
-                    console.log(comment.name) 
-                    console.log(comment.email)
-                    console.log(comment.id)
-                    console.log(results) 
-                    return callBack(null, results[0]); 
+                    callBack(error);;
+                }
+                console.log(comment.name)
+                console.log(comment.email)
+                console.log(comment.id)
+                console.log(results)
+                return callBack(null, results[0]);
 
             }
         );
     },
-    deleteComment: (comment, callBack) =>{
+    deleteComment: (comment, callBack) => {
         pool.query(
             'DELETE FROM comment WHERE idcomment = ?', [comment],
-            (error, results, fields) =>{
-                if(error){
-                   return callBack(error);
+            (error, results, fields) => {
+                if (error) {
+                    return callBack(error);
                 }
                 return callBack(null, results[0]);
-            } 
+            }
         );
     },
 

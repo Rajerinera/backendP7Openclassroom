@@ -22,24 +22,24 @@ module.exports = {
             }
             return res.json({
                 success: 1,
-                data: results
+                data: results,
             });
         });
     },
     updateUser: (req, res) => {
-        if(!req.body){
+        if (!req.body) {
             res.status(400).send({
-                message : "probleme"
+                message: "probleme"
             });
         }
-        updateUser(req.body, (err, results) => {  
+        updateUser(req.body, (err, results) => {
             if (err) {
-                console.log(err); 
+                console.log(err);
                 return;
             }
             return res.json({
                 sucess: 1,
-                message: "updated sucess", 
+                message: "updated sucess",
             })
         })
     },

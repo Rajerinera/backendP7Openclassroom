@@ -1,13 +1,20 @@
 const express = require("express"); //application qui permet le routing de notre backend
 require('dotenv').config(); //afin de sécuriser les données sur notre éditeur de code
+const cors = require('cors')
+const cookieSession = require('cookie-session')
+const helmet = require("helmet");
+const nocache = require("nocache")
 const loginRoutes = require ("./routes/login") //récuperer le path de login
 const userRoutes = require("./routes/user") //récuperer le path de user
 const commentRoutes = require("./routes/comment");
 
 const app = express();
+app.use(helmet());
+app.use(nocache());
 console.log("connecté à node js");
 
 //permet de connecter avec l'interface à travers les autorisations
+app.use(cors())
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -20,6 +27,19 @@ app.use((req, res, next) => {
     );
     next();
   });
+
+  app.use(
+    cookieSession({
+      name: "session",
+      secret: "s3CuR3T3",
+      cookie: {
+        secure: true,
+        httpOnly: true,
+        domain: "http://localhost:3000/",
+      },
+    })
+  );
+
  app.use(express.json()); //faire apparaitre les données en json sur le localhost ou postman
 
  app.use(loginRoutes);
