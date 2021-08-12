@@ -33,16 +33,18 @@ module.exports = {
             res.send(results);
         });
     },
+
     getCommentById: (req, res) => {
-        getCommentById(req.params.id, (err, rows) => {
+        getCommentById(req.params.commentId, (err, rows) => {
             if (err) {
                 console.log(err)
                 return
             }
             console.log("connect réussi ??" + rows)
-            res.send(rows);
+            res.json(rows);
         })
     },
+
     updateComment: (req, res) => {
         if (!req.body) {
             res.status(400).send({

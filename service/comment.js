@@ -28,28 +28,29 @@ module.exports = {
                 }
                 callBack(null, results)
             }
-           
+
         );
     },
 
-    getCommentById: (idcom, result) => {
-        pool.query("SELECT * FROM comment WHERE idcom = ?", [idcom],
-            (error, res,) => {
+    getCommentById: (idcom1, result) => {
+        pool.query("SELECT * FROM comment WHERE idcom = ?",
+            [idcom1],
+            (error, resultat,) => {
                 if (error) {
                     console.log("error", error);
-                    result(null, error);
+                    result(error, null);
                     return;
                 }
-                if (res.lenght) {
-                    console.log("found comment", res);
-                    result(null, res);
+                if (resultat.length) {
+                    console.log("found comment", resultat);
+                    result(null, resultat);
                     return;
                 }
-                result(res, null);
+                result(resultat[0], null);
 
             }
         );
-        console.log(idcom)
+        console.log(idcom1)
     },
     updateComment: (comment, callBack) => {
         pool.query(
