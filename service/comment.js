@@ -54,24 +54,24 @@ module.exports = {
     },
     updateComment: (comment, callBack) => {
         pool.query(
-            `UPDATE user SET title = ?, content = ? WHERE idcomment = ?`, [comment.title, comment.email, comment.id],
+            `UPDATE comment SET title = ?, content = ? WHERE idcom = ?`, [comment.title, comment.content, comment.idcom],
             (error, results, fields) => {
                 if (error) {
                     console.log(error)
                     callBack(error);;
                 }
-                console.log(comment.name)
-                console.log(comment.email)
-                console.log(comment.id)
+                console.log(comment.title)
+                console.log(comment.content)
+                console.log(comment.idcom)
                 console.log(results)
-                return callBack(null, results[0]);
+                return callBack(null, results);
 
             }
         );
     },
     deleteComment: (comment, callBack) => {
         pool.query(
-            'DELETE FROM comment WHERE idcomment = ?', [comment],
+            'DELETE FROM comment WHERE idcom = ?', [comment],
             (error, results, fields) => {
                 if (error) {
                     return callBack(error);

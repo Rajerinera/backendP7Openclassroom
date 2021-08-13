@@ -58,13 +58,13 @@ module.exports = {
             }
             return res.json({
                 sucess: 1,
-                message: "update sucess"
+                message: "update comm sucess"
             })
         })
     },
 
     deleteComment: (req, res) => {
-        deleteUser(req.body, (err, results) => {
+        deleteUser(req.params.commentId, (err, results) => {
             if (err) {
                 console.log(err);
                 return;

@@ -60,7 +60,7 @@ module.exports = {
                 if(error){
                    return callBack(error);
                 }
-                return callBack(null, results[0]);
+                callBack(null, results[0]);
             } 
         );
     },
