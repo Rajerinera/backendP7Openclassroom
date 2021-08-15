@@ -46,7 +46,7 @@ module.exports = {
                     result(null, resultat);
                     return;
                 }
-                result(resultat[0], null);
+                result(resultat[0], null); 
 
             }
         );
@@ -58,7 +58,7 @@ module.exports = {
             (error, results, fields) => {
                 if (error) {
                     console.log(error)
-                    callBack(error);;
+                    callBack(error); 
                 }
                 console.log(comment.title)
                 console.log(comment.content)
@@ -71,12 +71,12 @@ module.exports = {
     },
     deleteComment: (comment, callBack) => {
         pool.query(
-            'DELETE FROM comment WHERE idcom = ?', [comment],
+            'DELETE FROM comment WHERE idcomment = ?', [comment],
             (error, results, fields) => {
                 if (error) {
                     return callBack(error);
                 }
-                return callBack(null, results[0]);
+                callBack(null, results[0]);
             }
         );
     },

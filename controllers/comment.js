@@ -64,18 +64,13 @@ module.exports = {
     },
 
     deleteComment: (req, res) => {
-        deleteUser(req.params.commentId, (err, results) => {
+        const test = req.params.commentId
+        deleteComment(test, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
             }
-            if (!results) {
-                return res.json({
-                    sucess: 0,
-                    message: 'delete failed',
-                });
-            }
-            return res.json({
+             res.json({
                 sucess: 1,
                 message: 'comment delete'
             })
