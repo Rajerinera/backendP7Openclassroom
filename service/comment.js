@@ -46,7 +46,7 @@ module.exports = {
                     result(null, resultat);
                     return;
                 }
-                result(resultat[0], null); 
+                result(resultat[0], null);
 
             }
         );
@@ -54,17 +54,18 @@ module.exports = {
     },
     updateComment: (comment, callBack) => {
         pool.query(
-            `UPDATE comment SET title = ?, content = ? WHERE idcom = ?`, [comment.title, comment.content, comment.idcom],
+            `UPDATE comment SET title = ?, content = ? WHERE idcomment = ?`, 
+            [comment.title, comment.content, comment.idcomment],
             (error, results, fields) => {
                 if (error) {
                     console.log(error)
-                    callBack(error); 
+                    callBack(error);
                 }
                 console.log(comment.title)
                 console.log(comment.content)
                 console.log(comment.idcom)
                 console.log(results)
-                return callBack(null, results);
+                return callBack(null, results[0]);
 
             }
         );
