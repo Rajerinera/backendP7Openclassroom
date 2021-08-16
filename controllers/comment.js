@@ -1,12 +1,12 @@
 const { createComment, AllComment, getCommentById, updateComment, deleteComment } = require("../service/comment");
-const { deleteUser } = require("../service/user");
+const fs = require('fs');
 
 module.exports = {
     createComment: (req, res) => {
-        if (!req.body) {
-            res.status(400).send({
-                message: "need content"
-            })
+        if (!req.body.image ) {
+            req.body.image = null
+        }else {
+            req.body.image = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`
         }
         createComment(req.body, (err, results) => {
             if (err) {

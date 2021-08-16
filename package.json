@@ -14,9 +14,12 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "fs-extra": "^10.0.0",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.3",
     "mysql": "^2.18.1",
-    "nocache": "^3.0.1"
+    "nocache": "^3.0.1",
+    "path": "^0.12.7"
   }
 }

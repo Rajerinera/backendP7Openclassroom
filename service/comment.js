@@ -4,13 +4,15 @@ const mysql = require("mysql");
 module.exports = {
     createComment: (newComment, result) => {
         pool.query(
-            "INSERT into `comment`(`title`, `content`, `idcom`) VALUES(?,?,?)", [
+            "INSERT into `comment`(`title`, `content`, `image`, `idcom`) VALUES(?,?,?,?)", [
             newComment.title,
             newComment.content,
+            newComment.image,
             newComment.idcom
         ],
             (error, results, fields) => {
                 if (error) {
+                    console.log(newComment.image)
                     result(error);
                 }
                 return result(null, results)
@@ -36,7 +38,7 @@ module.exports = {
         pool.query("SELECT * FROM comment WHERE idcom = ?",
             [idcom1],
             (error, resultat,) => {
-                if (error) {
+                if (error) { 
                     console.log("error", error);
                     result(error, null);
                     return;

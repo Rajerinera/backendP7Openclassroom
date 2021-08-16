@@ -4,6 +4,7 @@ const cors = require('cors')
 const cookieSession = require('cookie-session')
 const helmet = require("helmet");
 const nocache = require("nocache")
+const path = require("path");
 const loginRoutes = require ("./routes/login") //récuperer le path de login
 const userRoutes = require("./routes/user") //récuperer le path de user
 const commentRoutes = require("./routes/comment");
@@ -15,13 +16,6 @@ console.log("connecté à node js");
 
 //permet de connecter avec l'interface à travers les autorisations
 app.use(cors())
-/*`app.all('*', function(req, res, next) {
-     var origin = req.get('origin'); 
-     res.header('Access-Control-Allow-Origin', origin);
-     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-     res.header('Access-Control-Allow-Headers', 'Content-Type');
-     next();
-});`*/
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -53,9 +47,5 @@ app.use((req, res, next) => {
  app.use(userRoutes);
  app.use(commentRoutes);
 
-//test
-//const db = require("./connectiondb/db")
-//app.get(db) //test réussi
-//
-
+ app.use("/images", express.static(path.join(__dirname, "images")));
   module.exports = app;
