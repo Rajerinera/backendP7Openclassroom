@@ -3,20 +3,24 @@ const fs = require('fs');
 
 module.exports = {
     createComment: (req, res) => {
-        if (!req.body.image ) {
-            req.body.image = null
-        }else {
-            req.body.image = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`
+        if (!req.body.image) {
+            req.body.image = req.file
+            ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+            : ""
+        } else {
+            req.body.image = req.file
+            ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+            : ""
         }
         createComment(req.body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
                     sucess: 0,
-                    message: 'error'
+                    message: 'error' 
                 });
-            }
-            return res.status(200).json({
+            } 
+            return res.status(200).json({ 
                 sucess: 1,
                 data: results,
                 message: "réussis vraiment"
@@ -44,9 +48,9 @@ module.exports = {
             res.json(rows);
         })
     },
-
+ 
     updateComment: (req, res) => {
-        if (!req.body) {
+        if (!req.body) { 
             res.status(400).send({
                 messaage: "problème comment"
             });
@@ -70,7 +74,7 @@ module.exports = {
                 console.log(err);
                 return;
             }
-             res.json({
+            res.json({
                 sucess: 1,
                 message: 'comment delete'
             })

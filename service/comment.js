@@ -19,8 +19,8 @@ module.exports = {
             }
         );
     },
-
-    AllComment: callBack => {
+ 
+    AllComment: callBack => { 
         pool.query(
             'SELECT * FROM comment',
             [],

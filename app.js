@@ -39,13 +39,14 @@ app.use((req, res, next) => {
         domain: "http://localhost:3000/",
       },
     })
-  );
+  ); 
 
  app.use(express.json()); //faire apparaitre les données en json sur le localhost ou postman
 
+ app.use("/images", express.static(path.join(__dirname, "images")));
  app.use(loginRoutes);
  app.use(userRoutes);
  app.use(commentRoutes);
 
- app.use("/images", express.static(path.join(__dirname, "images")));
+ 
   module.exports = app;
