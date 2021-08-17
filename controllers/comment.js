@@ -25,7 +25,7 @@ module.exports = {
                 data: results,
                 message: "réussis vraiment"
             })
-        })
+        }) 
     },
 
     AllComment: (req, res) => {
@@ -39,7 +39,7 @@ module.exports = {
     },
 
     getCommentById: (req, res) => {
-        getCommentById(req.params.commentId, (err, rows) => {
+        getCommentById(req.params.commentId, (err, rows) => { 
             if (err) {
                 console.log(err)
                 return
@@ -50,20 +50,25 @@ module.exports = {
     },
  
     updateComment: (req, res) => {
-        if (!req.body) { 
-            res.status(400).send({
-                messaage: "problème comment"
-            });
+        if (!req.body.image) {
+            req.body.image = req.file
+            ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+            : ""
+        } else {
+            req.body.image = req.file
+            ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+            : ""
         }
-        updateComment(req.body, (err, results) => {
+        
+        updateComment(req.body,req.params.commentId, (err, results) => {
             if (err) {
-                console.log(err);
+                console.log(err);  
                 return;
             }
             return res.json({
-                sucess: 1,
-                message: "update comm sucess"
-            })
+                sucess: 1, 
+                message: "update comm sucess"  
+            }) 
         })
     },
 

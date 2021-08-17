@@ -35,7 +35,7 @@ module.exports = {
     },
 
     getCommentById: (idcom1, result) => {
-        pool.query("SELECT * FROM comment WHERE idcom = ?",
+        pool.query("SELECT * FROM comment WHERE idcom = ?", 
             [idcom1],
             (error, resultat,) => {
                 if (error) { 
@@ -54,20 +54,20 @@ module.exports = {
         );
         console.log(idcom1)
     },
-    updateComment: (comment, callBack) => {
+    updateComment: (comment, id, callBack) => {
         pool.query(
-            `UPDATE comment SET title = ?, content = ? WHERE idcomment = ?`, 
-            [comment.title, comment.content, comment.idcomment],
+            `UPDATE comment SET title = ?, content = ?, image=? WHERE idcomment = ?`, 
+            [comment.title, comment.content,comment.image, id],
             (error, results, fields) => {
                 if (error) {
                     console.log(error)
-                    callBack(error);
+                    //callBack(error);
                 }
                 console.log(comment.title)
                 console.log(comment.content)
-                console.log(comment.idcom)
-                console.log(results)
-                return callBack(null, results[0]);
+                console.log(comment.image) 
+                console.log(id) 
+                //return callBack(null, results[0]); 
 
             }
         );
