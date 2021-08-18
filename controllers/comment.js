@@ -12,7 +12,7 @@ module.exports = {
             ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
             : ""
         }
-        createComment(req.body, (err, results) => {
+        createComment(req.body,req.params.commentId, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

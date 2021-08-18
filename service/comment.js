@@ -2,13 +2,13 @@ const pool = require('../connectiondb/db');
 const mysql = require("mysql");
 
 module.exports = {
-    createComment: (newComment, result) => {
+    createComment: (newComment, id, result) => {
         pool.query(
             "INSERT into `comment`(`title`, `content`, `image`, `idcom`) VALUES(?,?,?,?)", [
             newComment.title,
             newComment.content,
             newComment.image,
-            newComment.idcom
+            id
         ],
             (error, results, fields) => {
                 if (error) {
