@@ -9,6 +9,6 @@ module.exports = (req, res, next) => {
       error: "veuillez rentrer un email valide ! ex : marie@outlook.com",
     });
   } else {
-    next();
+    next(); 
   }
-};
+}; 

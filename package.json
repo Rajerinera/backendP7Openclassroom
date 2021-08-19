@@ -26,7 +26,6 @@
     "nocache": "^3.0.1",
     "password-validator": "^5.1.1",
     "path": "^0.12.7",
-    "validator": "^13.6.0",
-    "vuelidate": "^0.7.6"
+    "validator": "^13.6.0"
   }
 }

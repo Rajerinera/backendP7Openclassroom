@@ -5,14 +5,14 @@ module.exports = {
     createComment: (req, res) => {
         if (!req.body.image) {
             req.body.image = req.file
-            ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+            ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}` 
             : ""
         } else {
             req.body.image = req.file
             ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
             : ""
         }
-        createComment(req.body,req.params.commentId, (err, results) => {
+        createComment(req.body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

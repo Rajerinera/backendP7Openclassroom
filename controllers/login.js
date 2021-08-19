@@ -49,7 +49,7 @@ module.exports = {
             }
             const result = compareSync(password, results.password);
             if(result){
-                const token = jwt.sign({result: results}, process.env.TOKEN,{
+                const token = jwt.sign({result: results}, process.env.TOKENTEST,{
                  expiresIn:  "24h"
                 });
                 return res.status(200).json({
