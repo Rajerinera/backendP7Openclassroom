@@ -38,20 +38,17 @@ module.exports = {
     },
     updateUser: ( data, callBack) =>{  
         pool.query(
-        `UPDATE user SET name = ?, email = ? WHERE iduser = ?`,
-        [data.name,data.email,data.id],
+        `UPDATE user SET first_name = ?, name = ?, job= ? WHERE iduser = ?`,
+        [data.first_name,data.name,data.job,data.id],
             (error, results, fields) => { 
                 if(error){
                     console.log(error)
                     callBack(error); ;   
                 }  
-                    console.log(data.name) 
-                    console.log(data.email)
-                    console.log(data.id)
                     console.log(results) 
                     return callBack(null, results[0]); 
 
-            }
+            } 
         );
     },
     deleteUser: (data, callBack) =>{

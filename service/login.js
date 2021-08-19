@@ -6,10 +6,12 @@ const pool = require("../connectiondb/db");
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            "INSERT INTO `user`(`name`,`email`, `password`) VALUES(?,?,?)",
-            [data.name,
+            "INSERT INTO `user`(`first_name`,`name`,`job`,`email`, `password`) VALUES(?,?,?,?,?)",
+            [data.first_name,
+            data.name,
+            data.job,
             data.email,
-            data.password,
+            data.password, 
             ],
             (error, results, fields) =>{
                 if(error){
