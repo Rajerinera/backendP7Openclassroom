@@ -57,7 +57,7 @@ module.exports = {
     updateComment: (comment, id, callBack) => {
         pool.query(
             `UPDATE comment SET title = ?, content = ?, image=? WHERE idcomment = ?`, 
-            [comment.title, comment.content,comment.image, id],
+            [comment.title,comment.content,comment.image, id],
             (error, results, fields) => {
                 if (error) {
                     console.log(error)
@@ -66,7 +66,7 @@ module.exports = {
                 console.log(comment.title)
                 console.log(comment.content)
                 console.log(comment.image) 
-                console.log(id) 
+                console.log(comment.id) 
                 //return callBack(null, results[0]); 
 
             }
