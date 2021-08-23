@@ -4,10 +4,11 @@ const mysql = require("mysql");
 module.exports = {
     createComment: (newComment, result) => {
         pool.query(
-            "INSERT into `comment`(`title`, `content`, `image`, `idcom`) VALUES(?,?,?,?)", [
+            "INSERT into `comment`(`title`, `content`, `image`, `author`, `idcom`) VALUES(?,?,?,?,?)", [
             newComment.title,
             newComment.content,
             newComment.image,
+            newComment.author,
             newComment.idcom
         ],
             (error, results, fields) => {
@@ -61,13 +62,15 @@ module.exports = {
             (error, results, fields) => {
                 if (error) {
                     console.log(error)
+                    
                     //callBack(error);
                 }
                 console.log(comment.title)
                 console.log(comment.content)
                 console.log(comment.image) 
-                console.log(comment.id) 
-                //return callBack(null, results[0]); 
+                console.log(comment.id)
+                //return callBack(null, results); 
+                
 
             }
         );

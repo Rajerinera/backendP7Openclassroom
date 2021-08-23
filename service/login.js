@@ -13,7 +13,7 @@ module.exports = {
             data.email,
             data.password, 
             ],
-            (error, results, fields) =>{
+            (error, results, fields) =>{ 
                 if(error){
                     callBack(error);
                 }

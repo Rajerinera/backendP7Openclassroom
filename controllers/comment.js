@@ -75,7 +75,7 @@ module.exports = {
     deleteComment: (req, res) => {
         const test = req.params.commentId
         deleteComment(test, (err, results) => {
-            if (err) {
+            if (err) { 
                 console.log(err);
                 return;
             }
