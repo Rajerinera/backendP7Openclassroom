@@ -32,11 +32,11 @@ app.use((req, res, next) => {
   app.use(
     cookieSession({
       name: "session",
-      secret: "s3CuR3T3",
-      cookie: {
+      secret: process.env.SECRET,
+      cookie: { 
         secure: true,
-        httpOnly: true,
-        domain: "http://localhost:3000/",
+        httpOnly: true, 
+        domain: "http://localhost:3000/", 
       },
     })
   ); 

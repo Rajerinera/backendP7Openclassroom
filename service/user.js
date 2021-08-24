@@ -56,9 +56,10 @@ module.exports = {
             'DELETE FROM user WHERE iduser = ?', [data],
             (error, results, fields) =>{
                 if(error){
-                   return callBack(error);
+                    console.log(error);
                 }
-                callBack(null, results[0]);
+                console.log(data)
+                    //callBack(null, results[0]);
             } 
         );
     },

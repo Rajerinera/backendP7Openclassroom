@@ -43,8 +43,7 @@ module.exports = {
         })
     },
     deleteUser: (req, res) => {
-        const data = req.body;
-        deleteUser(data, (err, results) => {
+        deleteUser(req.params.id, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
@@ -53,11 +52,11 @@ module.exports = {
                 return res.json({
                     sucess: 0,
                     message: 'delete failed'
-                });
+                }); 
             }
-            return res.json({
+            return res.json({ 
                 sucess: 1,
-                message: 'user delete sucess'
+                message: 'user delete sucess' 
             });
         })
     }
